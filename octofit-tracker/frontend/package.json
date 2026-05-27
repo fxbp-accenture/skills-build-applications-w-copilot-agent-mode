@@ -9,8 +9,8 @@
     "preview": "vite preview --port 5173"
   },
   "dependencies": {
-    "react-dom": "^19",
-    "react": "^19"
+    "react": "^19",
+    "react-dom": "^19"
   },
   "devDependencies": {
     "vite": "^5.0.0",
