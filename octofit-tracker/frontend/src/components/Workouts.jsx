@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { WORKOUTS_API, parseListResponse } from './_api'
 
+// Codespaces API endpoint: https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/workouts
+
 export default function Workouts() {
   const [workouts, setWorkouts] = useState([])
   useEffect(() => {

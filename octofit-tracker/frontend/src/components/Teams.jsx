@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { TEAMS_API, parseListResponse } from './_api'
 
+// Codespaces API endpoint: https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/teams
+
 export default function Teams() {
   const [teams, setTeams] = useState([])
   useEffect(() => {

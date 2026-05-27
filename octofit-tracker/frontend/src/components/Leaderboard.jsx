@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { LEADERBOARD_API, parseListResponse } from './_api'
 
+// Codespaces API endpoint: https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/leaderboard
+
 export default function Leaderboard() {
   const [entries, setEntries] = useState([])
   useEffect(() => {
