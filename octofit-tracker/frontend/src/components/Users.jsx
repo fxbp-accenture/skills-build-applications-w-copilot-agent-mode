@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { getApiBase, parseListResponse } from './_api'
+import { USERS_API, parseListResponse } from './_api'
 
 export default function Users() {
   const [users, setUsers] = useState([])
   useEffect(() => {
-    const base = getApiBase()
-    fetch(`${base}/users/`)
+    fetch(USERS_API)
       .then(res => parseListResponse(res))
       .then(list => setUsers(list))
       .catch(err => console.error(err))

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { getApiBase, parseListResponse } from './_api'
+import { WORKOUTS_API, parseListResponse } from './_api'
 
 export default function Workouts() {
   const [workouts, setWorkouts] = useState([])
   useEffect(() => {
-    const base = getApiBase()
-    fetch(`${base}/workouts/`)
+    fetch(WORKOUTS_API)
       .then(res => parseListResponse(res))
       .then(list => setWorkouts(list))
       .catch(err => console.error(err))

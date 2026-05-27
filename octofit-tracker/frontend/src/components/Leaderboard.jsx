@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { getApiBase, parseListResponse } from './_api'
+import { LEADERBOARD_API, parseListResponse } from './_api'
 
 export default function Leaderboard() {
   const [entries, setEntries] = useState([])
   useEffect(() => {
-    const base = getApiBase()
-    fetch(`${base}/leaderboard/`)
+    fetch(LEADERBOARD_API)
       .then(res => parseListResponse(res))
       .then(list => setEntries(list))
       .catch(err => console.error(err))
