@@ -17,10 +17,11 @@ app.use(cors())
 const PORT = Number(process.env.PORT || 8000)
 const MONGO = process.env.MONGODB_URI || undefined
 
-import connectDB, { getMongoUri } from './config/database'
+import * as db from './config/database'
 
 // Connect to MongoDB
-connectDB(MONGO || getMongoUri())
+const mongoToUse = MONGO || db.getMongoUri ? db.getMongoUri('octofit_db') : undefined
+; (db.default || db.connectDB)(mongoToUse)
 
 // Mount API routers
 app.use('/api/users', usersRouter)
@@ -36,14 +37,13 @@ app.get('/', (req, res) => {
 
 // Codespaces-aware API URL support
 app.get('/api/url', (req, res) => {
-  const port = PORT
   const codespace = process.env.CODESPACE_NAME
   if (codespace) {
-    // GitHub Codespaces preview URL pattern
-    const url = `https://${codespace}-${port}.githubpreview.dev`
+    // Codespaces URL pattern for this project (port 8000)
+    const url = `https://${codespace}-8000.app.github.dev`
     return res.json({ apiUrl: url })
   }
-  const local = `http://localhost:${port}`
+  const local = `http://localhost:8000`
   res.json({ apiUrl: local })
 })
 
