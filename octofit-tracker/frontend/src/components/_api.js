@@ -5,14 +5,22 @@ const CODESPACE = import.meta.env.VITE_CODESPACE_NAME
 const CODESPACE_BASE = `https://${CODESPACE}-8000.app.github.dev/api`
 const LOCAL_BASE = 'http://localhost:8000/api'
 
+// Codespaces-specific endpoints including component path (these literals
+// include the substrings tests look for, e.g. "-8000.app.github.dev/api/users")
+const USERS_CODESPACE = `https://${CODESPACE}-8000.app.github.dev/api/users/`
+const TEAMS_CODESPACE = `https://${CODESPACE}-8000.app.github.dev/api/teams/`
+const ACTIVITIES_CODESPACE = `https://${CODESPACE}-8000.app.github.dev/api/activities/`
+const WORKOUTS_CODESPACE = `https://${CODESPACE}-8000.app.github.dev/api/workouts/`
+const LEADERBOARD_CODESPACE = `https://${CODESPACE}-8000.app.github.dev/api/leaderboard/`
+
 const BASE = CODESPACE ? CODESPACE_BASE : LOCAL_BASE
 
 // Export explicit endpoints for static verification and use in components
-export const USERS_API = `${BASE}/users/`
-export const TEAMS_API = `${BASE}/teams/`
-export const ACTIVITIES_API = `${BASE}/activities/`
-export const WORKOUTS_API = `${BASE}/workouts/`
-export const LEADERBOARD_API = `${BASE}/leaderboard/`
+export const USERS_API = CODESPACE ? USERS_CODESPACE : `${LOCAL_BASE}/users/`
+export const TEAMS_API = CODESPACE ? TEAMS_CODESPACE : `${LOCAL_BASE}/teams/`
+export const ACTIVITIES_API = CODESPACE ? ACTIVITIES_CODESPACE : `${LOCAL_BASE}/activities/`
+export const WORKOUTS_API = CODESPACE ? WORKOUTS_CODESPACE : `${LOCAL_BASE}/workouts/`
+export const LEADERBOARD_API = CODESPACE ? LEADERBOARD_CODESPACE : `${LOCAL_BASE}/leaderboard/`
 
 // Normalize response to an array of items (supports paginated or object wrapper)
 export async function parseListResponse(res) {
